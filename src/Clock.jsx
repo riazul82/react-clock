@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 const Clock = () => {
     const [time, setTime] = useState('00:00:00 XM');
-    const [date, setDate] = useState('day, month, 00, 0000');
+    const [date, setDate] = useState('day, month 00, 0000');
 
     useEffect(() => {
         setInterval(() => {
-            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
             const dt = new Date();
+
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
             // Time
             let hour = dt.getHours();
@@ -19,6 +20,7 @@ const Clock = () => {
             let xm = (hour >= 12) ? 'PM' : 'AM';
 
             hour = (hour > 12) ? hour - 12 : hour;
+            hour = (hour === 0) ? hour = 12 : hour;
             hour = (hour < 10) ? '0' + hour : hour;
             minute = (minute < 10) ? '0' + minute : minute;
             second = (second < 10) ? '0' + second : second;
@@ -29,8 +31,6 @@ const Clock = () => {
             // Date
             let dayIndex = dt.getDay();
             let dayName = dayNames[dayIndex];
-
-            console.log(dayIndex);
 
             let monthIndex = dt.getMonth();
             let monthName = monthNames[monthIndex];
